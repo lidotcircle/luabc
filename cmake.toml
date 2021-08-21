@@ -13,14 +13,16 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING ""
 set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING "")
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 """
-name = "PluginTemplate"
+name = "x64dbgLua"
 include-after = [
     "cmake/CPM.cmake",
     "cmake/x64dbg.cmake",
+    "cmake/luajit.cmake",
 ]
 
-[target.PluginTemplate]
+[target.x64dbgLua]
 type = "shared"
 sources = [
     "src/*.cpp",
@@ -28,4 +30,5 @@ sources = [
 ]
 cmake-after = """
 x64dbg_plugin(${CMKR_TARGET})
+link_luajit(${CMKR_TARGET})
 """

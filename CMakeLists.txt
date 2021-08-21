@@ -32,37 +32,40 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING ""
 set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING "")
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(PluginTemplate)
+project(x64dbgLua)
 
 include("cmake/CPM.cmake")
 include("cmake/x64dbg.cmake")
+include("cmake/luajit.cmake")
 
-# Target PluginTemplate
-set(CMKR_TARGET PluginTemplate)
-set(PluginTemplate_SOURCES "")
+# Target x64dbgLua
+set(CMKR_TARGET x64dbgLua)
+set(x64dbgLua_SOURCES "")
 
-list(APPEND PluginTemplate_SOURCES
+list(APPEND x64dbgLua_SOURCES
 	"src/plugin.cpp"
 	"src/pluginmain.cpp"
 	"src/plugin.h"
 	"src/pluginmain.h"
 )
 
-list(APPEND PluginTemplate_SOURCES
+list(APPEND x64dbgLua_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${PluginTemplate_SOURCES})
-add_library(PluginTemplate SHARED)
+set(CMKR_SOURCES ${x64dbgLua_SOURCES})
+add_library(x64dbgLua SHARED)
 
-if(PluginTemplate_SOURCES)
-	target_sources(PluginTemplate PRIVATE ${PluginTemplate_SOURCES})
+if(x64dbgLua_SOURCES)
+	target_sources(x64dbgLua PRIVATE ${x64dbgLua_SOURCES})
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${PluginTemplate_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${x64dbgLua_SOURCES})
 
 x64dbg_plugin(${CMKR_TARGET})
+link_luajit(${CMKR_TARGET})
 
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
