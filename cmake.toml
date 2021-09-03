@@ -27,6 +27,8 @@ type = "shared"
 sources = [
     "src/*.cpp",
     "src/*.h",
+    "src/module/*.cpp",
+    "src/module/*.h",
 ]
 cmake-after = """
 x64dbg_plugin(${CMKR_TARGET})

@@ -49,6 +49,8 @@ list(APPEND x64dbgLua_SOURCES
 	"src/pluginmain.cpp"
 	"src/plugin.h"
 	"src/pluginmain.h"
+	"src/module/libx64dbg.cpp"
+	"src/module/libx64dbg.h"
 )
 
 list(APPEND x64dbgLua_SOURCES

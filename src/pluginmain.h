@@ -63,3 +63,6 @@ extern int hMenu;
 extern int hMenuDisasm;
 extern int hMenuDump;
 extern int hMenuStack;
+
+#define BeginXDNameSpace namespace XD {
+#define EndXDNameSpace   }
