@@ -1,8 +1,6 @@
 #include "plugin.h"
 #include <lua/lua.hpp>
 #include "module/libx64dbg.h"
-using namespace XD;
-
 
 static lua_State *luaState = nullptr;
 
@@ -13,7 +11,7 @@ bool pluginInit(PLUG_INITSTRUCT* initStruct)
     if (luaState == nullptr) {
         return false;
     }
-    if (!luaopen_x64dbg(luaState)) {
+    if (!x64dbg::luaopen_x64dbg(luaState)) {
         return false;
     };
     return true; //Return false to cancel loading the plugin.

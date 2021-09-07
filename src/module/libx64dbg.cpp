@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 
-BeginXDNameSpace
 
+namespace x64dbg{
 
 static int plugin_logprint(lua_State* L) {
     auto str = lua_tostring(L, 1);
@@ -19,10 +19,11 @@ static const luaL_Reg pluginLib[] = {
 };
 
 int luaopen_x64dbg(lua_State* L) {
-    luaL_register(L, X64DbgModuleName, pluginLib);
+    luaL_register(L, "x64dbg", pluginLib);
+    luaL_newlib(L, pluginLib);
 
     char hellostr[256];
-    sprintf(hellostr, "%s.logprint(\"-> hello lua\\n\")", X64DbgModuleName);
+    sprintf(hellostr, "%s.logprint(\"-> hello lua\\n\")", "x64dbg");
     auto result = luaL_dostring(L, hellostr);
     if (result == LUA_OK) {
         return 1;
@@ -33,4 +34,4 @@ int luaopen_x64dbg(lua_State* L) {
     }
 }
 
-EndXDNameSpace
+} // namespace x64dbg

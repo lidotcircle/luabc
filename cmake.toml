@@ -1,6 +1,5 @@
 [cmake]
 version = "3.15"
-cmkr-include = "cmake/cmkr.cmake"
 
 [project]
 cmake-before = """
@@ -16,10 +15,11 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STR
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 """
 name = "x64dbgLua"
+version = "0.1"
 include-after = [
     "cmake/CPM.cmake",
     "cmake/x64dbg.cmake",
-    "cmake/luajit.cmake",
+    "cmake/lua.cmake",
 ]
 
 [target.x64dbgLua]
@@ -32,5 +32,5 @@ sources = [
 ]
 cmake-after = """
 x64dbg_plugin(${CMKR_TARGET})
-link_luajit(${CMKR_TARGET})
+link_lua(${CMKR_TARGET})
 """
